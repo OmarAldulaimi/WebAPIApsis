@@ -17,7 +17,8 @@ namespace WebAPIApsis.Controllers
         {
             this.Id = Guid.NewGuid().ToString();
             this.RollsList = new List<Rolls>();
-            this.TotalScore = 0;
+            this.TotalScore = 0; 
+
         }
         
     
