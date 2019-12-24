@@ -12,12 +12,14 @@ namespace WebAPIApsis.Controllers
         private List<Rolls> rollsList;
         private int score;
 
+
         public FrameList()
         {
             this.Id = Guid.NewGuid().ToString();
             this.RollsList = new List<Rolls>();
             this.TotalScore = 0;
         }
+        
     
 
     public string Id { get { return this.id; } set { this.id = value; } }

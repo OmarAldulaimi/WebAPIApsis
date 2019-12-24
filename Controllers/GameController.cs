@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -15,6 +13,10 @@ namespace WebAPIApsis.Controllers
         private FrameList frameList;
         private string request = "";
         private string response;
+        private int score = 0;
+        private int frames = 0;
+
+
 
         [Route("~/api/AddFrame")]
         [HttpPost]
@@ -31,9 +33,11 @@ namespace WebAPIApsis.Controllers
 
             try
             {
-                gameLogic.AddRollsFrame(frame);
-                frameList.RollsList.Add(frame);
-            }
+               gameLogic.ControllInput(frame);
+               AddRollsFrame(frame);
+               frameList.RollsList.Add(frame);
+            }         
+           
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
@@ -43,14 +47,32 @@ namespace WebAPIApsis.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, frameList);
         }
 
+        public void AddRollsFrame(Rolls frame)
+        {
+            if (frameList.RollsList.Count == 10)
+                throw new Exception("Game over");
+        
+            for (int i = 0; i < frameList.RollsList.Count; i++)
+            {
+                score += frameList.RollsList[i].RollOne == 10 && i != frames - 1
+                      ? frameList.RollsList[i].RollOne + gameLogic.Strike(i, frameList)
+                      : frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo == 10 && i != frames - 1
+                      ? frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + gameLogic.Spare(i,frameList)
+                      : frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + frameList.RollsList[i].RollThree;
+
+                frameList.RollsList[i].TotalScore = score;
+            }
+            frameList.TotalScore = score;
+
+        }
+
+        //generate an API key to each game
         [Route("~/api/AddGame")]
         [HttpPost]
         public HttpResponseMessage AddGame()
         {
             gameLogs = new GameLogs();
-            gameLogic = new GameLogic();
-            
-
+  
             try
             {
              frameList = gameLogs.AddNewGame();
