@@ -34,8 +34,8 @@ namespace WebAPIApsis.Controllers
             try
             {
                gameLogic.ControllInput(frame);
-               AddRollsFrame(frame);
                frameList.RollsList.Add(frame);
+               AddRollsFrame(frame);
             }         
            
             catch (Exception e)
@@ -54,12 +54,18 @@ namespace WebAPIApsis.Controllers
         
             for (int i = 0; i < frameList.RollsList.Count; i++)
             {
-                score += frameList.RollsList[i].RollOne == 10 && i != frames - 1
-                      ? frameList.RollsList[i].RollOne + gameLogic.Strike(i, frameList)
-                      : frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo == 10 && i != frames - 1
-                      ? frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + gameLogic.Spare(i,frameList)
-                      : frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + frameList.RollsList[i].RollThree;
 
+                if (frameList.RollsList[i].RollOne == 10 && i != frames - 1)
+                { 
+                    score += frameList.RollsList[i].RollOne + gameLogic.Strike(i, frameList);
+                }
+                else if (frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo == 10 && i != frames - 1) { 
+                    score += frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + gameLogic.Spare(i, frameList);
+                }
+                else
+                {
+                    score += frameList.RollsList[i].RollOne + frameList.RollsList[i].RollTwo + frameList.RollsList[i].RollThree;
+                }
                 frameList.RollsList[i].TotalScore = score;
             }
             frameList.TotalScore = score;

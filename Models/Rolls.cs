@@ -13,21 +13,7 @@ namespace WebAPIApsis.Models
         private int rollTwo;
         private int rollThree;
         private int totalScore;
-        public bool IsSpare
-        {
-            get
-            {
-                return RollOne != 10 && RollOne + RollTwo == 10;
-            }
 
-        }
-        public bool IsStrike
-        {
-            get
-            {
-                return RollOne == 10;
-            }
-        }
 
 
         public Rolls(int frameNbr, int rollOne, int rollTwo)
@@ -47,11 +33,6 @@ namespace WebAPIApsis.Models
 
         public Rolls() { }
 
-        public int FrameNbr
-        {
-            get { return frameNbr; }
-            set { frameNbr = value; }
-        }
 
         public int RollOne
         {

@@ -8,40 +8,30 @@ namespace WebAPIApsis.Controllers
 {
     public class GameLogic
     {
-        private FrameList frameList;
-        private int frame = 0;
+        private FrameList frameList = new FrameList();
+        private int score = 0;
 
-  
+
+
         public void ControllInput(Rolls frame)
         {
             if (frame.RollOne  < 0 || frame.RollOne > 10)
                 throw new ArgumentException("The number should be between 0 - 10");
             if (frame.RollTwo < 0 || frame.RollTwo > 10)
                 throw new ArgumentException("The number should be between 0 - 10");
-            if (frame.RollOne + frame.RollTwo > 10 && frameList.RollsList.Count < 9)
-                throw new ArgumentException("Only 10 pins!");
-            if (frame.RollOne + frame.RollTwo > 10 && frame.RollOne != 10)
-                throw new ArgumentException("Out of range");
+            if (frame.RollThree < 0 || frame.RollThree > 10)
+                throw new ArgumentException("The number should be between 0 - 10");
+            if (frame.RollOne + frame.RollTwo > 10)
+                throw new ArgumentException("Roll 1 and 2 should be 10");      
         }
+
+ 
 
         public int Strike(int i, FrameList frameList)
         {
-            var score = 0;
             try
             {
-                var next = frameList.RollsList[i + 1];
-                if (i == frame - 2)
-                {
-                    score += next.RollOne + next.RollTwo;
-                }
-                else if (next.RollOne == 10)
-                {
-                    score += next.RollOne;
-                    score += frameList.RollsList[i + 2].RollOne;
-                }
-                else
-                    score += next.RollOne + next.RollTwo;
-
+                score += frameList.RollsList[i + 1].RollOne + frameList.RollsList[i + 1].RollTwo + frameList.RollsList[i + 2].RollOne + frameList.RollsList[i + 2].RollTwo;
             }
             catch (Exception e)
             {
@@ -53,13 +43,10 @@ namespace WebAPIApsis.Controllers
 
        public int Spare(int i, FrameList frameList)
         {
-            var score = 0;
-
+            
             try
             {
-                var next = frameList.RollsList[i + 1];
-                score += next.RollOne;
-
+                score += frameList.RollsList[i + 1].RollOne;
             }
             catch (Exception e)
             {

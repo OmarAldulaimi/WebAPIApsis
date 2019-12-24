@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Apsis_Test.Models.GameRolls>
+
+@{
+    ViewBag.Title = "GetMembers";
+}
+
+<h2>GetMembers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FrameNbr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RollOne)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RollTwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RollThree)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrameNbr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RollOne)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RollTwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RollThree)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
