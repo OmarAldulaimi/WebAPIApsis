@@ -2,10 +2,12 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebAPIApsis.Models;
 
 namespace WebAPIApsis.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GameController : ApiController
     {
         private GameLogic gameLogic;

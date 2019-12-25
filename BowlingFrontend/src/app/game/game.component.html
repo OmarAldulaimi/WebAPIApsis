@@ -1,0 +1,25 @@
+<div id="container">
+    <h2>Let's play bowling!</h2>
+    <img src="https://weareecoapp.com/wp-content/uploads/2019/06/ST-Bowling_BABBsm_640x356.jpg" alt="bowling" width="300" height="150">
+    <br/>
+    <button (click)="onNewGame($event)">New Game</button>
+    <h2>You game id is:</h2>
+    <h4>{{bowlingData.Id}}</h4>
+
+    <h2> Bowling rolls</h2>  
+
+    <form  (ngSubmit) = "onClickSubmit()" >
+        <h4> Roll 1</h4> 
+        <input type = "text" class="input" name = "rollOne" [(ngModel)]="Roll_One" >
+        <h4> Roll 2</h4> 
+              <input type = "text" class="input" name = "rollTwo" [(ngModel)]="Roll_Two" >
+        <h4> Roll 3 </h4>     
+        <input type = "text" class="input" name = "rollThree" [(ngModel)]="Roll_Three" *ngIf="show" >
+      </form>
+
+<button (click)="onAddRoll($event2)">Send your rolls!</button>
+    <br/>
+    <h4>Total score: {{bowlingData.TotalScore}}</h4>
+    <br/>
+    <br/>
+      </div>
