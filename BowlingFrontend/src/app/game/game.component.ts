@@ -38,7 +38,7 @@ export class GameComponent implements OnInit {
 
   onAddRoll($event2){   
 
-    return this.http.post('http://localhost:62345/' + '/api/AddFrame?id=' + this.bowlingData.Id, {RollOne: this.Roll_One, RollTwo : this.Roll_Two, RollThree : this.Roll_Three})
+    return this.http.post('http://localhost:62345/' + '/api/AddFrame?id=' + this.bowlingData.Id , {RollOne: this.Roll_One, RollTwo : this.Roll_Two, RollThree : this.Roll_Three})
       .subscribe(
 
         (response: BowlingData) =>

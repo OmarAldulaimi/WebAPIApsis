@@ -2,7 +2,7 @@ import { Rolls} from './Rolls';
 
 export class BowlingData
 {
-  Id:string;
+  Id:string = "";
   Rolls :Rolls[];
   TotalScore:number;
 }
