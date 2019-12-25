@@ -7,7 +7,7 @@ using WebAPIApsis.Models;
 
 namespace WebAPIApsis.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200/", headers: "*", methods: "*")]
     public class GameController : ApiController
     {
         private GameLogic gameLogic;
@@ -19,7 +19,7 @@ namespace WebAPIApsis.Controllers
         private int frames = 0;
 
 
-
+        [EnableCors(origins: "http://localhost:4200/", headers: "*", methods: "*")]
         [Route("~/api/AddFrame")]
         [HttpPost]
         public HttpResponseMessage AddFrame(string id, [FromBody]Rolls frame)
