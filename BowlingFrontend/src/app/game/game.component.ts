@@ -11,7 +11,7 @@ export class GameComponent implements OnInit {
   private bowlingData : BowlingData;
   private Roll_One : number = 0;
   private Roll_Two : number = 0;
-  private Roll_Three : number = 0;
+  private Roll_Three : number = 0; 
   private show : boolean;
   
 
